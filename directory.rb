@@ -32,7 +32,11 @@ def print(students)
 end
 
 def print_footer(students)
-puts "Overall, we have #{students.count} great students"
+    if students.count > 1 || students.count == 0
+puts "Overall, we have #{students.count} students."
+else 
+    puts "Overall, we have #{students.count} student."
+end
 end
 
 def input_students
@@ -67,7 +71,11 @@ def input_students
      
     
     students << {name: name, cohort: cohort, age: age, birth_country: birthcountry, hobbies: hobbies}
-    puts "Now we have #{students.count} students"
+    if students.count > 1 || students.count == 0
+        puts "Now we have #{students.count} students"
+    else
+        puts "Now we have #{students.count} student"
+    end
     
     puts "Enter next name:"
     name = gets.chomp
