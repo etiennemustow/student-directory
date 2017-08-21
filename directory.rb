@@ -1,3 +1,5 @@
+require 'date'
+
 def print_header
   header = "The students of Villains Academy"
   puts header.center(header.length)
@@ -37,9 +39,21 @@ def input_students
   
   name = gets.chomp
   
-  while !name.empty? do
+    while !name.empty? do
       
      puts "Please submit the following extra information for this student."
+         puts "Which cohort is #{name} part of?"
+     cohort = gets.chomp.capitalize
+     if cohort == ""
+       cohort = "november"
+     else
+      until Date::MONTHNAMES.include? cohort
+         puts "Please enter a valid cohort."
+         cohort = gets.chomp.capitalize
+       end
+     end
+     cohort = cohort.to_sym
+     
      puts "#{name}'s age:"
      age = gets.chomp
      puts "#{name}'s country of birth:"
@@ -47,8 +61,8 @@ def input_students
      puts "#{name}'s hobbies:"
      hobbies = gets.chomp
      
-    
-    students << {name: name, cohort: :november, age: age, birth_country: birthcountry, hobbies: hobbies}
+    puts cohort.class
+    students << {name: name, cohort: cohort, age: age, birth_country: birthcountry, hobbies: hobbies}
     puts "Now we have #{students.count} students"
     
     puts "Enter next name:"
