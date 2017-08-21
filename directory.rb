@@ -20,11 +20,15 @@ def twelve_chars(students)
 end
 
 def print(students)
-   i = 0
-while i < students.size
- puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort) Age: #{students[i][:age]}; Birth Country: #{students[i][:birth_country]}; Hobbies: #{students[i][:hobbies]}"
-  i += 1
-end
+   cohort_months = students.map{|entry| entry[:cohort]}.uniq
+   cohort_months.each do |month|
+     puts "#{month} cohort"
+     students.select{|student| student[:cohort] == month
+     }.each_with_index do |student, i|
+       puts "#{i + 1}. #{student[:name]}; Age: #{student[:age]}; Birth Country: #{student[:birth_country]}; Hobbies: #{student[:hobbies]}"
+     end
+   
+ end
 end
 
 def print_footer(students)
@@ -61,7 +65,7 @@ def input_students
      puts "#{name}'s hobbies:"
      hobbies = gets.chomp
      
-    puts cohort.class
+    
     students << {name: name, cohort: cohort, age: age, birth_country: birthcountry, hobbies: hobbies}
     puts "Now we have #{students.count} students"
     
