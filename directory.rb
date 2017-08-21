@@ -6,10 +6,10 @@ def print_header
   puts "-------------".center(header.length)
 end
 
-def which_letter
+def filter_students
  puts "With which letter does the names you wish to search for begin?"
  puts "To search for all names, just hit return."
- @initial = gets.gsub(/\n/,"").upcase
+ @initial = gets.gsub(/\n/,"")
 end
 
 def twelve_chars(students)
@@ -20,6 +20,7 @@ def twelve_chars(students)
 end
 
 def print(students)
+   if students != []
    cohort_months = students.map{|entry| entry[:cohort]}.uniq
    cohort_months.each do |month|
      puts "#{month} cohort"
@@ -27,8 +28,8 @@ def print(students)
      }.each_with_index do |student, i|
        puts "#{i + 1}. #{student[:name]}; Age: #{student[:age]}; Birth Country: #{student[:birth_country]}; Hobbies: #{student[:hobbies]}"
      end
-   
- end
+   end
+  end
 end
 
 def print_footer(students)
@@ -89,7 +90,7 @@ end
 
 students = input_students
 
-which_letter
+filter_students
 print_header
 print(students)
 print_footer(students)
