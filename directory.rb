@@ -19,7 +19,7 @@ end
 def print(students)
    i = 0
 while i < students.size
- puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+ puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort) Age: #{students[i][:age]}, Birth Country: #{students[i][:birth_country]}, Hobbies: #{students[i][:hobbies]}"
   i += 1
 end
 end
@@ -37,10 +37,20 @@ def input_students
   name = gets.chomp
   
   while !name.empty? do
+      
+     puts "Please submit the following extra information for this student."
+     puts "#{name}'s age:"
+     age = gets.chomp
+     puts "#{name}'s country of birth:"
+     birthcountry = gets.chomp
+     puts "#{name}'s hobbies:"
+     hobbies = gets.chomp
+     
     
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: :november, age: age, birth_country: birthcountry, hobbies: hobbies}
     puts "Now we have #{students.count} students"
     
+    puts "Enter next name:"
     name = gets.chomp
   end
   
