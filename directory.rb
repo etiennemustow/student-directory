@@ -9,12 +9,12 @@ end
 def which_letter
  puts "With which letter does the names you wish to search for begin?"
  puts "To search for all names, just hit return."
- @initial = gets.chomp.upcase
+ @initial = gets.gsub(/\n/,"").upcase
 end
 
 def twelve_chars(students)
  puts "Would you like to search for students whose names are shorter than 12 characters? (Y/N)"
- response = gets.chomp.upcase
+ response = gets.gsub(/\n/,"").upcase
  short_names = students.select {|student| student[:name].length < 12}
  response == "Y" ? print(short_names) : print(students)
 end
@@ -45,13 +45,13 @@ def input_students
   
   students = []
   
-  name = gets.chomp
+  name = gets.gsub(/\n/,"")
   
     while !name.empty? do
       
      puts "Please submit the following extra information for this student."
          puts "Which cohort is #{name} part of?"
-     cohort = gets.chomp.capitalize
+     cohort = gets.gsub(/\n/,"").capitalize
      if cohort == ""
        cohort = "november"
      else
@@ -63,11 +63,11 @@ def input_students
      cohort = cohort.to_sym
      
      puts "#{name}'s age:"
-     age = gets.chomp
+     age = gets.gsub(/\n/,"")
      puts "#{name}'s country of birth:"
-     birthcountry = gets.chomp
+     birthcountry = gets.gsub(/\n/,"")
      puts "#{name}'s hobbies:"
-     hobbies = gets.chomp
+     hobbies = gets.gsub(/\n/,"")
      
     
     students << {name: name, cohort: cohort, age: age, birth_country: birthcountry, hobbies: hobbies}
@@ -78,7 +78,7 @@ def input_students
     end
     
     puts "Enter next name:"
-    name = gets.chomp
+    name = gets.gsub(/\n/,"")
   end
   
   
