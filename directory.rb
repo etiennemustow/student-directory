@@ -1,6 +1,7 @@
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  header = "The students of Villains Academy"
+  puts header.center(header.length)
+  puts "-------------".center(header.length)
 end
 
 def which_letter
@@ -19,7 +20,7 @@ end
 def print(students)
    i = 0
 while i < students.size
- puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort) Age: #{students[i][:age]}, Birth Country: #{students[i][:birth_country]}, Hobbies: #{students[i][:hobbies]}"
+ puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort) Age: #{students[i][:age]}; Birth Country: #{students[i][:birth_country]}; Hobbies: #{students[i][:hobbies]}"
   i += 1
 end
 end
