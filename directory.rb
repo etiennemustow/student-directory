@@ -5,7 +5,7 @@ end
 
 def which_letter
  puts "With which letter does the names you wish to search for begin?"
- puts "To search for all names, just hit return twice."
+ puts "To search for all names, just hit return."
  @initial = gets.chomp.upcase
 end
 
@@ -17,13 +17,11 @@ def twelve_chars(students)
 end
 
 def print(students)
-   students.each_with_index do |student, index|
-  if student[:name][0] == @initial
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
-    elsif @initial == "" || @initial == nil?
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
-  end
-  end
+   i = 0
+while i < students.size
+ puts "#{i + 1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+  i += 1
+end
 end
 
 def print_footer(students)
