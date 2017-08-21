@@ -9,6 +9,13 @@ def which_letter
  @initial = gets.chomp.upcase
 end
 
+def twelve_chars(students)
+ puts "Would you like to search for students whose names are shorter than 12 characters? (Y/N)"
+ response = gets.chomp.upcase
+ short_names = students.select {|student| student[:name].length < 12}
+ response == "Y" ? print(short_names) : print(students)
+end
+
 def print(students)
    students.each_with_index do |student, index|
   if student[:name][0] == @initial
@@ -39,6 +46,7 @@ def input_students
     name = gets.chomp
   end
   
+  
   students
 end
 
@@ -50,3 +58,4 @@ which_letter
 print_header
 print(students)
 print_footer(students)
+twelve_chars(students)
