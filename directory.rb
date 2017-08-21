@@ -3,10 +3,20 @@ def print_header
   puts "-------------"
 end
 
+def which_letter
+ puts "With which letter does the names you wish to search for begin?"
+ puts "To search for all names, just hit return twice."
+ @initial = gets.chomp.upcase
+end
+
 def print(students)
-students.each_with_index do |student, index|
-  puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
- end
+   students.each_with_index do |student, index|
+  if student[:name][0] == @initial
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    elsif @initial == "" || @initial == nil?
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  end
+  end
 end
 
 def print_footer(students)
@@ -36,6 +46,7 @@ end
 
 students = input_students
 
+which_letter
 print_header
 print(students)
 print_footer(students)
