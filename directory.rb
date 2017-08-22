@@ -59,7 +59,7 @@ def input_students
       until Date::MONTHNAMES.include? cohort
          puts "Please enter a valid cohort."
          cohort = gets.chomp.capitalize
-       end
+      end
      end
      cohort = cohort.to_sym
      
@@ -80,16 +80,38 @@ def input_students
     
     puts "Enter next name:"
     name = gets.gsub(/\n/,"")
-  end
+    end
   
   
   students
 end
 
+def interative_menu
+    
+    students = []
+    loop do 
+        puts "1. Input the students"
+        puts "2. Show the students"
+        puts "9. Exit"
+        
+        selection = gets.chomp
+        
+        case selection
+        when "1"
+            students = input_students
+        when "2"
+            print_header
+            print(students)
+            print_footer(students)
+        when "9"
+            exit #this will terminate the program
+        else 
+            puts "I don't know what you meant. Please, try again"
+        end
+    end
+end
 
-
-students = input_students
-
+interative_menu
 filter_students
 print_header
 print(students)
