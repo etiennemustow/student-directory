@@ -53,6 +53,8 @@ def process(selection)
             show_students
         when "3"
             save_students
+        when "4"
+            load_students
         when "9"
             exit #this will terminate the program
         else 
@@ -60,7 +62,7 @@ def process(selection)
         end
     end
 end
-
+ 
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -108,6 +110,7 @@ def print_menu
     puts "1. Input the students"
     puts "2. Show the students"
     puts "3. Save the list to students.csv"
+    puts "4. Load the list from students.csv"
     puts "9. Exit"
 end
 
@@ -130,6 +133,15 @@ def save_students
         csv_line = student_data.join(",")
         file.puts csv_line
     end
+    file.close
+end
+
+def load_students
+    file = File.open("students.csv", "r")
+    file.readlines.each do |line|
+        name, cohort, age, birthcountry, hobbies = line.chomp.split(',')
+        @students << {name: name, cohort: cohort.to_sym, age: age, birth_country: birthcountry, hobbies: hobbies}
+end
     file.close
 end
 
