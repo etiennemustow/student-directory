@@ -74,8 +74,7 @@ def input_students
      puts "Please submit the following extra information for this student."
          puts "Which cohort is #{name} part of?"
      cohort = gets.chomp.capitalize
-     if cohort == ""
-       cohort = "november"
+     if cohort == ""? cohort = "November" : cohort = valid_cohort(cohort)
      else
       until Date::MONTHNAMES.include? cohort
          puts "Please enter a valid cohort."
@@ -93,17 +92,29 @@ def input_students
      
     add_info(name, cohort, age, birth_country, hobbies)
     
-    if @students.count > 1 || @students.count == 0
-        puts "Now we have #{@students.count} students"
-    else
-        puts "Now we have #{@students.count} student"
-    end
+    student_count
     
     puts "Enter next name:"
-    name = gets.chomp
+    name = STDIN.gets.chomp
     end
   
     @students
+end
+
+def valid_cohort(cohort)
+  until Date::MONTHNAMES.include? cohort
+    puts "Please enter a valid cohort."
+    cohort = STDIN.gets.chomp.capitalize
+  end
+  cohort
+end
+
+def student_count
+  if @students.count == 1
+    puts "Now we have #{@students.count} student."
+  else
+    puts "Now we have #{@students.count} students."
+  end
 end
 
 def print_menu
