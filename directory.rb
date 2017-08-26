@@ -10,12 +10,12 @@ end
 def filter_students #de-activated method
  puts "With which letter does the names you wish to search for begin?"
  puts "To search for all names, just hit return."
- @initial = gets.chomp
+ @initial = STDIN.gets.chomp
 end
 
 def twelve_chars #de-activated method 
  puts "Would you like to search for students whose names are shorter than 12 characters? (Y/N)"
- response = gets.chomp.upcase
+ response = STDIN.gets.chomp.upcase
  short_names = @students.select {|student| student[:name].length < 12}
  response == "Y" ? print(short_names) : print(@students)
 end
@@ -44,7 +44,7 @@ end
 def process(selection)
     loop do 
         print_menu
-        selection = gets.chomp
+        selection = STDIN.gets.chomp
         
         case selection
         when "1"
@@ -67,7 +67,7 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   
-  name = gets.chomp
+  name = STDIN.gets.chomp
   
     while !name.empty? do
       
@@ -136,8 +136,8 @@ def save_students
     file.close
 end
 
-def load_students
-    file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+    file = File.open(filename, "r")
     file.readlines.each do |line|
         name, cohort, age, birthcountry, hobbies = line.chomp.split(',')
         @students << {name: name, cohort: cohort.to_sym, age: age, birth_country: birthcountry, hobbies: hobbies}
@@ -145,6 +145,19 @@ end
     file.close
 end
 
+def try_load_students
+  filename = ARGV.first # first argument from the command line
+  return if filename.nil? # get out of the method if it isn't given
+  if File.exists?(filename) # if it exists
+    load_students(filename)
+     puts "** Loaded #{@students.count} from #{filename} **"
+  else # if it doesn't exist
+    puts "Sorry, #{filename} doesn't exist."
+    exit # quits the program
+  end
+end
+
+try_load_students
 interactive_menu
 
 
