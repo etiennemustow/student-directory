@@ -2,7 +2,7 @@ require 'date'
 @students = [] # an empty array accessible to all methods
 
 def print_header 
-  header = "The students of Villains Academy"
+  header = "The students of Makers Academy"
   puts header.center(header.length) # centers the header in the entirety of its length
   puts "-------------".center(header.length)
 end
@@ -27,7 +27,7 @@ def print_student_list
      puts "#{month} cohort"
      @students.select{|student| student[:cohort] == month
      }.each_with_index do |student, i|
-       puts "#{i + 1}. #{student[:name]}; Age: #{student[:age]}; Birth Country: #{student[:birth_country]}; Hobbies: #{student[:hobbies]}"
+       puts "#{i + 1}. #{student[:name]}: Age: #{student[:age]}; Birth Country: #{student[:birth_country]}; Hobbies: #{student[:hobbies]}"
      end
    end
    end
@@ -35,9 +35,9 @@ end
 
 def print_footer
     if @students.count == 1
-    puts "Overall, we have #{@students.count} student."
+    puts "\nOverall, we have #{@students.count} student."
     else 
-    puts "Overall, we have #{@students.count} students."
+    puts "\nOverall, we have #{@students.count} students."
     end
 end
 
@@ -107,7 +107,7 @@ def input_students
 end
 
 def print_menu
-    puts "1. Input the students"
+    puts "\n1. Input the students"
     puts "2. Show the students"
     puts "3. Save the list to students.csv"
     puts "4. Load the list from students.csv"
@@ -121,7 +121,8 @@ def show_students
 end 
 
 def interactive_menu
-     process(gets.chomp)
+    puts "Press Enter to start"
+    process(gets.chomp)
 end
 
 def save_students
