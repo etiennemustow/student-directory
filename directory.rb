@@ -65,55 +65,47 @@ end
  
 def input_students
   puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
-  
+  puts "To finish, just hit return "
   name = STDIN.gets.chomp
   
     while !name.empty? do
-      
-     puts "Please submit the following extra information for this student."
-         puts "Which cohort is #{name} part of?"
-     cohort = gets.chomp.capitalize
-     if cohort == ""? cohort = "November" : cohort = valid_cohort(cohort)
-     else
-      until Date::MONTHNAMES.include? cohort
-         puts "Please enter a valid cohort."
-         cohort = STDIN.gets.chomp.capitalize
-      end
-     end
-     cohort = cohort.to_sym
-     
-     puts "#{name}'s age:"
-     age = STDIN.gets.chomp
-     puts "#{name}'s country of birth:"
-     birth_country = STDIN.gets.chomp
-     puts "#{name}'s hobbies:"
-     hobbies = STDIN.gets.chomp
-     
-    add_info(name, cohort, age, birth_country, hobbies)
-    
+    puts "Please submit the following extra information for this student."
+    puts "Which cohort is #{name} part of?"
+    cohort = gets.chomp.capitalize
+    if cohort == ""? cohort = "November" : cohort = valid_cohort(cohort)
+    extra_info(name)
+    add_info(name, cohort, @age, @birth_country, @hobbies)
     student_count
-    
-    puts "Enter next name:"
+    puts "\nPlease, enter next name:" 
     name = STDIN.gets.chomp
     end
-  
     @students
+    end
 end
+
+def extra_info(name)
+     puts "#{name}'s age:"
+     @age = STDIN.gets.chomp
+     puts "#{name}'s country of birth:"
+     @birth_country = STDIN.gets.chomp
+     puts "#{name}'s hobbies:"
+     @hobbies = STDIN.gets.chomp
+end
+
 
 def valid_cohort(cohort)
   until Date::MONTHNAMES.include? cohort
     puts "Please enter a valid cohort."
     cohort = STDIN.gets.chomp.capitalize
   end
-  cohort
+  cohort = cohort.to_sym
 end
 
 def student_count
   if @students.count == 1
-    puts "Now we have #{@students.count} student."
+    puts "\nNow we have #{@students.count} student." # Updated with a new message
   else
-    puts "Now we have #{@students.count} students."
+    puts "\nNow we have #{@students.count} students."# Updated with a new message
   end
 end
 
@@ -137,9 +129,7 @@ def interactive_menu
 end
 
 def save_students
-    # opens file for writing
     file = File.open("students.csv", "w")
-    # iterates over the array of students
     @students.each do |student|
         student_data = [student[:name], student[:cohort], student[:age], student[:birth_country], student[:hobbies]]
         csv_line = student_data.join(",")
@@ -173,8 +163,6 @@ def add_info(name, cohort, age, birth_country, hobbies)
     @students << {name: name, cohort: cohort.to_sym, age: age, birth_country: birth_country, hobbies: hobbies}
 end
 
+
 try_load_students
 interactive_menu
-
-
-
