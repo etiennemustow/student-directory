@@ -56,6 +56,7 @@ def process(selection)
         when "4"
             load_students
         when "9"
+            puts "Program ended"
             exit #this will terminate the program
         else 
             puts "I don't know what you meant. Please, try again"
@@ -146,6 +147,7 @@ def save_students
         file.puts csv_line
     end
     file.close
+    puts "students.csv saved!"
 end
 
 def load_students(filename = "students.csv")
@@ -155,6 +157,7 @@ def load_students(filename = "students.csv")
         add_info(name, cohort, age, birth_country, hobbies)
 end
     file.close
+    puts ""#{filename}" loaded!"
 end
 
 def try_load_students
